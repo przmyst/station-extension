@@ -42,15 +42,13 @@ const connectRemote = (remotePort) => {
               sendResponse("on" + capitalize(key), changed)
 
             if (changed.uuid) {
-              browser.storage.local.set(
-                key,
-                newValue.filter((tx) => tx.uuid !== changed.uuid)
-              )
+              browser.storage.local.set({
+                [key]: newValue.filter((tx) => tx.uuid !== changed.uuid)
+              })
             } else {
-              browser.storage.local.set(
-                key,
-                newValue.filter((tx) => tx.id !== changed.id)
-              )
+              browser.storage.local.set({
+                [key]: newValue.filter((tx) => tx.id !== changed.id)
+              })
             }
 
             browser.storage.local
